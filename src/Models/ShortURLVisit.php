@@ -58,6 +58,7 @@ class ShortURLVisit extends Model
         'visited_at',
         'referer_url',
         'device_type',
+        'lead_id',
     ];
 
     /**

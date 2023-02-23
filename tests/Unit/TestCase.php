@@ -63,6 +63,7 @@ abstract class TestCase extends OrchestraTestCase
         include_once __DIR__.'/../../database/migrations/2020_02_12_008432_update_short_url_visits_table_for_version_two_zero_zero.php';
         include_once __DIR__.'/../../database/migrations/2020_04_10_224546_update_short_url_table_for_version_three_zero_zero.php';
         include_once __DIR__.'/../../database/migrations/2020_04_20_009283_update_short_url_table_add_option_to_forward_query_params.php';
+        include_once __DIR__.'/../../database/migrations/2023_02_23_224848_update_short_url_visits_table_add_lead_id.php';
 
         (new \CreateShortUrlsTable)->up();
         (new \CreateShortUrlVisitsTable)->up();
@@ -70,5 +71,6 @@ abstract class TestCase extends OrchestraTestCase
         (new \UpdateShortURLVisitsTableForVersionTwoZeroZero)->up();
         (new \UpdateShortURLTableForVersionThreeZeroZero)->up();
         (new \UpdateShortUrlTableAddOptionToForwardQueryParams)->up();
+        (new \UpdateShortURLVisitsTableAddLeadId)->up();
     }
 }
