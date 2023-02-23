@@ -53,13 +53,13 @@ class Resolver
      * @param  ShortURL  $shortURL
      * @return bool
      */
-    public function handleVisit(Request $request, ShortURL $shortURL): bool
+    public function handleVisit(Request $request, ShortURL $shortURL,$lead_id=null): bool
     {
         if (! $this->shouldAllowAccess($shortURL)) {
             abort(404);
         }
 
-        $visit = $this->recordVisit($request, $shortURL);
+        $visit = $this->recordVisit($request, $shortURL,$lead_id);
 
         Event::dispatch(new ShortURLVisited($shortURL, $visit));
 
@@ -105,12 +105,13 @@ class Resolver
      * @param  ShortURL  $shortURL
      * @return ShortURLVisit
      */
-    protected function recordVisit(Request $request, ShortURL $shortURL): ShortURLVisit
+    protected function recordVisit(Request $request, ShortURL $shortURL,$lead_id=null): ShortURLVisit
     {
         $visit = new ShortURLVisit();
 
         $visit->short_url_id = $shortURL->id;
         $visit->visited_at = now();
+        $visit->lead_id = $lead_id;
 
         if ($shortURL->track_visits) {
             $this->trackVisit($shortURL, $visit, $request);
